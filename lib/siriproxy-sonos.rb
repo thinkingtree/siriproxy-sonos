@@ -7,8 +7,8 @@ require 'sonos'
 class SiriProxy::Plugin::Sonos < SiriProxy::Plugin
   def initialize(config)
     #if you have custom configuration options, process them here!
-    @sonos = Sonos::System.new(Sonos::Discovery.new(1,config[:ip_address]))
-    @speaker = system.speakers.first
+    @sonos = ::Sonos::System.new(::Sonos::Discovery.new(1,config[:ip_address]).topology)
+    @speaker = @sonos.speakers.first
   end
 
   listen_for /stop sonos/i do
