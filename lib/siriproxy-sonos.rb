@@ -1,3 +1,5 @@
+require 'rubygems'
+require 'bundler/setup'
 require 'cora'
 require 'siri_objects'
 require 'sonos'
@@ -5,7 +7,7 @@ require 'sonos'
 class SiriProxy::Plugin::Sonos < SiriProxy::Plugin
   def initialize(config)
     #if you have custom configuration options, process them here!
-    @sonos = Sonos::System.new
+    @sonos = Sonos::System.new(Sonos::Discovery.new(1,config[:ip_address]))
     @speaker = system.speakers.first
   end
 
